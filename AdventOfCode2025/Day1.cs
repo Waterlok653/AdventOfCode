@@ -48,6 +48,7 @@ namespace AdventOfCode2025
             foreach (var line in inputs.Where(s => s.Length != 0).ToArray())
             {
                 var result = RotateTwo(line, position);
+                //Console.WriteLine(line + " Old Position " + position + " new positioon " + result.Item1 + " Passe by 0 " + result.Item2);
                 position = result.Item1;
                 total0 += result.Item2;
             }
@@ -55,6 +56,7 @@ namespace AdventOfCode2025
         }
         public static (int, int) RotateTwo(string line, int position)
         {
+            int initialPosition = position;
             char direction = line[0];
             int distance = int.Parse(line.Substring(1));
             switch (direction)
@@ -63,14 +65,22 @@ namespace AdventOfCode2025
                     position += distance;
                     if (position >= 100)
                     {
-                        return ((position % 100 + 100) % 100, position / 100);
+                        var newPos = (position % 100 + 100) % 100;
+                        var timeByZero = position / 100;
+                        return (newPos, timeByZero);
                     }
                     break;
                 case 'L':
                     position -= distance;
-                    if (position < 0)
+                    if (position <= 0)
                     {
-                        return ((position % 100 + 100) % 100, 1 + (-position - 1) / 100);
+                        var newPos = (position % 100 + 100) % 100;
+                        var timeByZero = 1 + (-position) / 100;
+                        if (initialPosition == 0)
+                        {
+                            timeByZero--;
+                        }
+                        return (newPos, timeByZero);
                     }
                     break;
             }
