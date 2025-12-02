@@ -8,6 +8,9 @@ namespace AdventOfCode2025
         {
             Day1.SolveOne();
             Day1.SolveTwo();
+
+
+            Day2.SolveOne();
         }
     }
 }
