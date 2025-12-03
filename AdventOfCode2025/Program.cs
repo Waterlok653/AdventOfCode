@@ -11,6 +11,7 @@ namespace AdventOfCode2025
 
 
             Day2.SolveOne();
+            Day2.SolveTwo();
         }
     }
 }

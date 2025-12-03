@@ -41,5 +41,63 @@ namespace AdventOfCode2025
             Console.WriteLine("Sum of invalid :" + NbNotOk.Sum());
         }
 
+
+        public static void SolveTwo()
+        {
+            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day2.txt");
+            string[] inputs = input.Split(",");
+            (long, long)[] ranges = inputs.Select(s =>
+            {
+                var split = s.Split("-");
+                (long, long) newValue = (long.Parse(split[0]), long.Parse(split[1]));
+                return newValue;
+            }).ToArray();
+            List<long> NbNotOk = new List<long>();
+
+            foreach (var range in ranges)
+            {
+                for (long i = range.Item1; i <= range.Item2; i++)
+                {
+                    string nbInString = i.ToString();
+                    bool isAdd = false;
+                    for (int j = 2; j <= nbInString.Length; j++)
+                    {
+                        if (isAdd)
+                        {
+                            break;
+                        }
+                        if (nbInString.Length % j == 0)
+                        {
+                            int lenghtOfPart = nbInString.Length / j;
+                            List<string> parts = new List<string>();
+                            for (int k = 1; k <= j; k++)
+                            {
+                                int start = (lenghtOfPart * k - lenghtOfPart);
+                                int end = (lenghtOfPart * k);
+                                parts.Add(nbInString[start..end]);
+                            }
+
+                            string first = parts.First();
+                            bool isAllTheSame = true;
+                            foreach (var part in parts)
+                            {
+                                if (!part.Equals(first))
+                                {
+                                    isAllTheSame = false;
+                                }
+                            }
+                            if (isAllTheSame)
+                            {
+                                NbNotOk.Add(i);
+                                isAdd = true;
+                            }
+
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Sum of invalid :" + NbNotOk.Sum());
+        }
+
     }
 }
