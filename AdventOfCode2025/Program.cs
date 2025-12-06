@@ -24,6 +24,10 @@ namespace AdventOfCode2025
 
             Day5.SolveOne();
             Day5.SolveTwo();
+
+
+            Day6.SolveOne();
+            Day6.SolveTwo();
         }
     }
 }
