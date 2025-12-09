@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -37,9 +38,9 @@ namespace AdventOfCode2025
 
         public static void SolveTwo()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day9.test.txt");
+            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day9.txt");
             string[] rows = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
-            List<long[]> flore = rows.Select(t => t.Split(",").Select(c => long.Parse(c)).ToArray()).ToList();
+            List<int[]> flore = rows.Select(t => t.Split(",").Select(c => int.Parse(c)).ToArray()).ToList();
             long maxX = 0;
             long maxY = 0;
             for (int i = 0; i < flore.Count; i++)
@@ -54,20 +55,11 @@ namespace AdventOfCode2025
                 }
             }
 
-            char[][] pavement = new char[maxX + 1][];
-            for (int i = 0; i <= maxX; i++)
+            char[][] pavement = new char[maxX + 2][];
+            for (int i = 0; i <= maxX + 1; i++)
             {
-                pavement[i] = new char[maxY + 1];
+                pavement[i] = new char[maxY + 2];
             }
-
-
-            //for (int i = 0; i < pavement.Length; i++)
-            //{
-            //    for (int j = 0; j < pavement[0].Length; j++)
-            //    {
-            //        pavement[i][j] = '.';
-            //    }
-            //}
 
             long lastX = 0;
             long lastY = 0;
@@ -132,208 +124,219 @@ namespace AdventOfCode2025
 
                 }
             }
-
-            //drawInside
-            /*bool isFinish = true;
-            pavement[pavement.Length - 2][pavement[0].Length - 2] = 'I';
-            do
+            
+            List<(int, int, int, int, long)> AllRectengle = new List<(int, int, int, int, long)>();
+            foreach (var tile1 in flore)
             {
-                isFinish = true;
-                for (int i = pavement.Length - 1; i >= 0; i--)
+                foreach (var tile2 in flore)
                 {
-                    for (int j = pavement[0].Length - 1; j >= 0; j--)
-                    {
-                        if (pavement[i][j].Equals("."))
-                        {
-                            if (i != 0)
-                            {
-                                if (j != 0 && pavement[i - 1][j - 1].Equals('I'))
-                                {
-                                    pavement[i][j] = 'I';
-                                    isFinish = false;
-                                    continue;
-                                }
-                                if (pavement[i - 1][j].Equals('I'))
-                                {
-                                    pavement[i][j] = 'I';
-                                    isFinish = false;
-                                    continue;
-                                }
-                                if (j != pavement[0].Length - 1 && pavement[i - 1][j + 1].Equals('I'))
-                                {
-                                    pavement[i][j] = 'I';
-                                    isFinish = false;
-                                    continue;
-                                }
-                            }
-                            if (j != 0 && pavement[i][j - 1].Equals('I'))
-                            {
-                                pavement[i][j] = 'I';
-                                isFinish = false;
-                                continue;
-                            }
-                            if (j != pavement[0].Length - 1 && pavement[i][j + 1].Equals('I'))
-                            {
-                                pavement[i][j] = 'I';
-                                isFinish = false;
-                                continue;
-                            }
-                            if (i != pavement.Length - 1)
-                            {
-                                if (j != 0 && pavement[i + 1][j - 1].Equals('I'))
-                                {
-                                    pavement[i][j] = 'I';
-                                    isFinish = false;
-                                    continue;
-                                }
-                                if (pavement[i + 1][j].Equals('I'))
-                                {
-                                    pavement[i][j] = 'I';
-                                    isFinish = false;
-                                    continue;
-                                }
-                                if (j != pavement[0].Length - 1 && pavement[i + 1][j + 1].Equals('I'))
-                                {
-                                    pavement[i][j] = 'I';
-                                    isFinish = false;
-                                    continue;
-                                }
-                            }
-                        }
-                    }
-                }
-
-            } while (!isFinish);*/
-
-
-
-            long maxSize = 0;
-            for (int i = 0; i < pavement.Length; i++)
-            {
-                for (int j = 0; j < pavement[0].Length; j++)
-                {
-                    if (pavement[i][j]=='R')
-                    {
-                        for (int m = i + 1; m < pavement.Length; m++)
-                        {
-                            for (int n = j + 1; n < pavement[0].Length; n++)
-                            {
-                                if (!(pavement[m][n]=='R'))
-                                {
-                                    continue;
-                                }
-                                var lenght = (m - i + 1);
-                                var height = (n - j + 1);
-                                var size = lenght * height;
-                                if (size > maxSize)
-                                {
-                                    bool isCorrect = true;
-                                    for (long k = ((i < m) ? i : m) + 1; k < ((i > m) ? i : m); k++)
-                                    {
-                                        for (long l = ((j < n) ? j : n) + 1; l < ((j > n) ? j : n); l++)
-                                        {
-                                            if (pavement[k][l]=='R')
-                                            {
-                                                isCorrect = false;
-                                                break;
-                                            }
-                                        }
-                                        if (!isCorrect)
-                                        {
-                                            break;
-                                        }
-                                    }
-                                    if (isCorrect)
-                                    {
-                                        isCorrect = false;
-                                        if (lenght - 1 > 0)
-                                        {
-                                            lenght = 1;
-                                        }
-                                        else if (lenght - 1 < 0)
-                                        {
-                                            lenght = -1;
-                                        }
-                                        else
-                                        {
-                                            lenght = 0;
-                                        }
-
-                                        if (height - 1 > 0)
-                                        {
-                                            height = 1;
-                                        }
-                                        else if (height - 1 < 0)
-                                        {
-                                            height = -1;
-                                        }
-                                        else
-                                        {
-                                            height = 0;
-                                        }
-
-                                        for (long l = ((j < n) ? j : n); ((height == 1) ? l < pavement[0].Length : l >= 0); l += height)
-                                        {
-                                            if (pavement[i][l]=='V')
-                                            {
-                                                isCorrect = true;
-                                                break;
-                                            }
-                                        }
-                                        if (isCorrect)
-                                        {
-                                            isCorrect = false;
-
-                                            for (long k = ((i < m) ? i : m); ((lenght == 1) ? k < pavement.Length : k >= 0); k += lenght)
-                                            {
-                                                if (pavement[k][j]=='V')
-                                                {
-                                                    isCorrect = true;
-                                                    break;
-                                                }
-                                            }
-                                            if (isCorrect)
-                                            {
-                                                isCorrect=false;
-                                                for (long l = ((j > n) ? j : n); ((height == -1) ? l < pavement[0].Length : l >= 0); l -= height)
-                                                {
-                                                    if (pavement[m][l]=='V')
-                                                    {
-                                                        isCorrect = true;
-                                                        break;
-                                                    }
-                                                }
-                                                if (isCorrect)
-                                                {
-                                                    isCorrect = false;
-
-                                                    for (long k = ((i > m) ? i : m); ((lenght == -1) ? k < pavement.Length : k >= 0); k -= lenght)
-                                                    {
-                                                        if (pavement[k][n]=='V')
-                                                        {
-                                                            isCorrect = true;
-                                                            break;
-                                                        }
-                                                    }
-                                                    if (isCorrect)
-                                                    {
-                                                        maxSize = size;
-                                                    }
-                                                }
-                                            }
-
-                                        }
-                                    }
-                                }
-                            }
-
-
-                        }
-                    }
+                    var lenght = Math.Abs(tile2[0] - tile1[0]) + 1;
+                    var height = Math.Abs(tile2[1] - tile1[1]) + 1;
+                    var size = lenght * height;
+                    AllRectengle.Add((tile1[0], tile1[1], tile2[0], tile2[1], size));
                 }
             }
 
-            Console.WriteLine("the bigest one it of size " + maxSize);
+            AllRectengle = AllRectengle.Distinct().OrderByDescending(x => x.Item5).ToList();
+
+            foreach (var item in AllRectengle)
+            {
+                if (IsAValidRectangle((item.Item1, item.Item2), (item.Item3, item.Item4), pavement))
+                {
+                    Console.WriteLine(item.Item1 + " " + item.Item2 + " " + item.Item3 + " " + item.Item4);
+                    Console.WriteLine("the bigest one it of size " + item.Item5);
+                    break;
+                }
+            }
+
+        }
+
+        public static bool IsAValidRectangle((int x, int y) point1, (int x, int y) point2, char[][] table)
+        {
+            return DontContaineARedTile(point1, point2, table) && IsAValidRectangleForPointOnTop(point1, point2, table) && IsAValidRectangleForPointOnBottom(point1, point2, table);
+        }
+        public static bool DontContaineARedTile((int x, int y) point1, (int x, int y) point2, char[][] table)
+        {
+            return true;
+        }
+        public static bool IsAValidRectangleForPointOnTop((int x, int y) point1, (int x, int y) point2, char[][] table)
+        {
+
+            return IsAValidRectangleForX(point1, point2, table) && IsAValidRectangleForY(point1, point2, table);
+        }
+        public static bool IsAValidRectangleForPointOnBottom((int x, int y) point1, (int x, int y) point2, char[][] table)
+        {
+            return IsAValidRectangleForX(point2, point1, table) && IsAValidRectangleForY(point2, point1, table);
+        }
+        public static bool IsAValidRectangleForY((int x, int y) point1, (int x, int y) point2, char[][] table)
+        {
+            bool shouldIMoveLeftToRight = point1.y < point2.y;
+            bool theRectengleIsOver = point1.x < point2.x;
+            char lastSimbol = table[point1.x][point1.y];
+            int startPosY = point1.y;
+            int limit = point2.y;
+
+            int i = startPosY;
+            bool isFirstTime = true;
+
+            while ((shouldIMoveLeftToRight) ? i < limit : i > limit)
+            {
+                if (isFirstTime)
+                {
+                    isFirstTime = false;
+                }
+                else
+                {
+                    char currentChar = table[point1.x][i];
+                    if (lastSimbol == '\0')
+                    {
+                        if (currentChar == 'V')
+                        {
+                            //on repasse devant nous donc on sort de la limite
+                            return false;
+                        }
+                    }
+                    if (lastSimbol == 'V')
+                    {
+                        if (currentChar == '\0')
+                        {
+                            return false;
+                        }
+                    }
+                    if (currentChar == 'R')
+                    {
+                        if (theRectengleIsOver && table[point1.x + 1][i] != '\0')
+                        {
+                            //on revient a notre hauteur mais on vient de enbas
+                            return false;
+                        }
+                        if (!theRectengleIsOver && table[point1.x + 1][i] == '\0')
+                        {
+                            //on revient a notre hauteur mais on vient d'en haut
+                            return false;
+                        }
+                    }
+                    lastSimbol = currentChar;
+                }
+
+
+                if (shouldIMoveLeftToRight)
+                {
+                    i++;
+                }
+                else
+                {
+                    i--;
+                }
+            }
+            do
+            {
+                char currentChar = table[point1.x][i];
+
+                if (currentChar == 'R')
+                {
+                    return true;
+                }
+                if (currentChar == 'V')
+                {
+                    return true;
+                }
+
+                if (shouldIMoveLeftToRight)
+                {
+                    i++;
+                }
+                else
+                {
+                    i--;
+                }
+            } while ((shouldIMoveLeftToRight) ? i < table[0].Length : i >= 0);
+            return false;
+
+        }
+        public static bool IsAValidRectangleForX((int x, int y) point1, (int x, int y) point2, char[][] table)
+        {
+            bool shouldIMoveFromTopToBottom = point1.x < point2.x;
+            bool theRectengleIsOnTheRight = point1.y < point2.y;
+            char lastSimbol = table[point1.x][point1.y];
+            int startPosX = point1.x;
+            int limit = point2.x;
+
+            int i = startPosX;
+            bool isFirstTime = true;
+
+            while ((shouldIMoveFromTopToBottom) ? i < limit : i > limit)
+            {
+                if (isFirstTime)
+                {
+                    isFirstTime = false;
+                }
+                else
+                {
+                    char currentChar = table[i][point1.y];
+                    if (lastSimbol == '\0')
+                    {
+                        if (currentChar == 'V')
+                        {
+                            //on repasse devant nous donc on sort de la limite
+                            return false;
+                        }
+                    }
+                    if (lastSimbol == 'V')
+                    {
+                        if (currentChar == '\0')
+                        {
+                            return false;
+                        }
+                    }
+                    if (currentChar == 'R')
+                    {
+                        if (theRectengleIsOnTheRight && table[i][point1.y + 1] != '\0')
+                        {
+                            //on revient a notre hauteur mais on vient de la droite
+                            return false;
+                        }
+                        if (!theRectengleIsOnTheRight && table[i][point1.y + 1] == '\0')
+                        {
+                            //on revient a notre hauteur mais on vient de la gauche
+                            return false;
+                        }
+                    }
+                    lastSimbol = currentChar;
+                }
+
+                if (shouldIMoveFromTopToBottom)
+                {
+                    i++;
+                }
+                else
+                {
+                    i--;
+                }
+            }
+            do
+            {
+                char currentChar = table[i][point1.y];
+
+                if (currentChar == 'R')
+                {
+                    return true;
+                }
+                if (currentChar == 'V')
+                {
+                    return true;
+                }
+
+                if (shouldIMoveFromTopToBottom)
+                {
+                    i++;
+                }
+                else
+                {
+                    i--;
+                }
+            } while ((shouldIMoveFromTopToBottom) ? i < table.Length : i >= 0);
+            return false;
         }
 
     }
