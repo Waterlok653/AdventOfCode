@@ -6,7 +6,7 @@ namespace AdventOfCode2025
     {
         static void Main(string[] args)
         {
-            Day1.SolveOne();
+            /*Day1.SolveOne();
             Day1.SolveTwo();
 
 
@@ -39,7 +39,10 @@ namespace AdventOfCode2025
 
 
             Day9.SolveOne();
-            Day9.SolveTwo();
+            Day9.SolveTwo();*/
+
+            Day10.SolveOne();
+            Day10.SolveTwo();
         }
     }
 }
