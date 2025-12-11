@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Numerics;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,8 +14,11 @@ namespace AdventOfCode2025
         public int[][] Buttons = new int[0][];
         public int[] Jolitage = new int[0];
     }
+
+
     public static class Day10
     {
+        private static int[][] allShape = new int[0][];
         public static void SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");
@@ -61,7 +66,7 @@ namespace AdventOfCode2025
             int sumOfPress = 0;
             foreach (var machine in list)
             {
-                var allValidInput = new List<(string,int)>();
+                var allValidInput = new List<(string, int)>();
                 for (int i = 0; i < int.MaxValue; i++)
                 {
                     var buttonToPress = ConverteNumberToBinary(i, machine.Buttons.Length, out bool tryEveryPosibility);
@@ -78,12 +83,13 @@ namespace AdventOfCode2025
                 sumOfPress += allValidInput.OrderBy(t => t.Item2).First().Item2;
 
             }
-            Console.WriteLine("You need to press that many button : "+ sumOfPress);
+            Console.WriteLine("You need to press that many button : " + sumOfPress);
         }
         public static string ConverteNumberToBinary(int input, int length, out bool tryEveryPosibility)
         {
             var currentInput = Convert.ToString(input, 2);
-            while (currentInput.Length < length) {
+            while (currentInput.Length < length)
+            {
                 currentInput = "0" + currentInput;
             }
             tryEveryPosibility = currentInput.Length > length;
@@ -114,12 +120,13 @@ namespace AdventOfCode2025
             return true;
         }
 
-        public static bool IsAGoodInputForVoltage(Day10Object machine, List<Int128> inputs)
+        public static bool IsAGoodInputForVoltage(Day10Object machine, int[] inputs, out bool isImposible)
         {
+            isImposible = false;
             int[] currentStatus = new int[machine.Jolitage.Length];
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < inputs.Length; i++)
             {
-                for (Int128 j = 0; j < inputs[i]; j++)
+                for (int j = 0; j < inputs[i]; j++)
                 {
                     for (int k = 0; k < machine.Buttons[i].Length; k++)
                     {
@@ -131,21 +138,66 @@ namespace AdventOfCode2025
             {
                 if (currentStatus[i] != machine.Jolitage[i])
                 {
+                    if (currentStatus[i] > machine.Jolitage[i])
+                    {
+                        isImposible = true;
+                    }
                     return false;
                 }
             }
             return true;
         }
-        public static List<Int128> ConverteNumberToBasse(Int128 input, Int128 newBase, int length, out bool tryEveryPosibility)
+
+        public static List<int[]> GetAllCombination(int numberOfPresse, List<int[]> current)
+        {
+            if (current.Count == 0)
+            {
+                current.Add(new int[allShape[0].Length]);
+            }
+            if (numberOfPresse == 0)
+            {
+                return current;
+            }
+
+            var newCurrent = new List<int[]>();
+
+            foreach (var shape in allShape)
+            {
+                foreach (var item in current)
+                {
+                    var newInput = new int[item.Length];
+                    for(int i = 0;i < newInput.Length; i++)
+                    {
+                        newInput[i] = item[i] + shape[i];
+                    }
+                    newCurrent.Add(newInput);
+                }
+            }
+
+            return GetAllCombination(--numberOfPresse, newCurrent.DistinctBy(e => string.Join(",", e)).ToList());
+        }
+        public static List<Int128> ConverteNumberToBasse(Int128 input, Int128 newBase, int length, int sumOfVoltage, out bool tryEveryPosibility, out bool isImposible)
         {
             tryEveryPosibility = false;
             List<Int128> newNumber = new List<Int128>();
             Int128 reste = input;
-
+            Int128 sum = 0;
             while (reste > 0)
             {
-                newNumber.Add(reste / newBase);
-                reste = reste % newBase;
+                var value = reste % newBase;
+                sum += value;
+                if (sum > sumOfVoltage)
+                {
+                    isImposible = true;
+                    return newNumber;
+                }
+                newNumber.Add(value);
+                reste = reste / newBase;
+            }
+            if (sum < newBase - 1)
+            {
+                isImposible = true;
+                return newNumber;
             }
             if (newNumber.Count == length)
             {
@@ -159,13 +211,12 @@ namespace AdventOfCode2025
                     }
                 }
             }
+            isImposible = false;
             return newNumber;
         }
 
         public static void SolveTwo()
         {
-
-            var currentInput = Convert.ToString(129, 128);
 
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -209,33 +260,51 @@ namespace AdventOfCode2025
                 list.Add(newObject);
             }
             Int128 sumOfPress = 0;
+            int ccc =0;
             foreach (var machine in list)
             {
-                var allValidInput = new List<(List<Int128>, Int128)>();
-                var bigestVoltage = machine.Jolitage.Max();
-                for (Int128 i = 0; i < Int128.MaxValue; i++)
+                Console.WriteLine(ccc++);
+                bool hasFound = false;
+                allShape = new int[machine.Buttons.Length][];
+                for (int i = 0; i < machine.Buttons.Length; i++)
                 {
-                    var buttonToPress = ConverteNumberToBasse(i, bigestVoltage + 1, machine.Buttons.Length, out bool tryEveryPosibility);
-                    if (tryEveryPosibility)
+                    allShape[i] = ConverteNumberToBinary(int.Parse(Math.Pow(2, i).ToString()), machine.Buttons.Length, out bool RAF).ToCharArray().Select(t => int.Parse(t.ToString())).ToArray(); ;
+                }
+                bool isFirstTime = true;
+                List<int[]> all = new List<int[]>();
+                for (int numberOfPresse = machine.Jolitage.Max(); numberOfPresse < int.MaxValue; numberOfPresse++)
+                {
+                    all = GetAllCombination((isFirstTime) ? numberOfPresse : 1, all);
+                    isFirstTime = false;
+                    List<int[]> needToBeRM = new List<int[]>();
+                    foreach (var combinesonOfPress in all)
+                    {
+                        bool isImposible = false;
+                        if (IsAGoodInputForVoltage(machine, combinesonOfPress, out isImposible))
+                        {
+                            hasFound = true;
+                            sumOfPress += numberOfPresse;
+                            break;
+                        }
+                        if (isImposible)
+                        {
+                            needToBeRM.Add(combinesonOfPress);
+                        }
+                    }
+                    foreach (var item in needToBeRM)
+                    {
+                        all.Remove(item);
+                    }
+                    if (hasFound)
                     {
                         break;
                     }
-                    if (IsAGoodInputForVoltage(machine, buttonToPress))
-                    {
-                        Int128 sum = 0;
-                        foreach (var button in buttonToPress)
-                        {
-                            sum++;
-                        }
-                        allValidInput.Add((buttonToPress, sum));
-                    }
 
                 }
-                sumOfPress += allValidInput.OrderBy(t => t.Item2).First().Item2;
+
             }
             Console.WriteLine("You need to press that many button : " + sumOfPress);
+
         }
-    }
-}
     }
 }
