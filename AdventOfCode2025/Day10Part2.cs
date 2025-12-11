@@ -117,7 +117,6 @@ namespace AdventOfCode2025
             Int128 sumOfPress = 0;
             foreach (var machine in list)
             {
-                Dictionary<string, string> cfg = new Dictionary<string, string>() { { "MODEL", "true" } };
                 using (Context ctx = new Context())
                 {
                     Optimize opt = ctx.MkOptimize();
