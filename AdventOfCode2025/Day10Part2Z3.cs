@@ -64,7 +64,7 @@ namespace AdventOfCode2025
             return newVector;
         }
     }
-    public static class Day10Part2
+    public static class Day10Part2Z3
     {
 
         public static Int128 Solve()
