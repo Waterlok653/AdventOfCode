@@ -19,7 +19,7 @@ namespace AdventOfCode2025
     public static class Day10
     {
         private static int[][] allShape = new int[0][];
-        public static void SolveOne()
+        public static Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -83,7 +83,7 @@ namespace AdventOfCode2025
                 sumOfPress += allValidInput.OrderBy(t => t.Item2).First().Item2;
 
             }
-            Console.WriteLine("You need to press that many button : " + sumOfPress);
+            return sumOfPress;
         }
         public static string ConverteNumberToBinary(int input, int length, out bool tryEveryPosibility)
         {
@@ -215,7 +215,7 @@ namespace AdventOfCode2025
             return newNumber;
         }
 
-        public static void SolveTwo()
+        public static Int128 SolveTwo()
         {
 
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");
@@ -303,7 +303,7 @@ namespace AdventOfCode2025
                 }
 
             }
-            Console.WriteLine("You need to press that many button : " + sumOfPress);
+           return sumOfPress;
 
         }
     }

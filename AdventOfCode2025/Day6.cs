@@ -8,7 +8,7 @@ namespace AdventOfCode2025
 {
     public static class Day6
     {
-        public static void SolveOne()
+        public static Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day6.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -58,11 +58,11 @@ namespace AdventOfCode2025
                 }
                 sum += result;
             }
-            Console.WriteLine("the sum of the math is : " + sum);
+            return sum;
         }
 
 
-        public static void SolveTwo()
+        public static Int128 SolveTwo()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day6.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -125,7 +125,7 @@ namespace AdventOfCode2025
             }
             sum += result;
 
-            Console.WriteLine("the sum of the math is : " + sum);
+            return sum;
         }
     }
 }

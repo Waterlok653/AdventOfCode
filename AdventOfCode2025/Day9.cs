@@ -11,7 +11,7 @@ namespace AdventOfCode2025
 {
     public static class Day9
     {
-        public static void SolveOne()
+        public static Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day9.txt");
             string[] rows = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -32,11 +32,11 @@ namespace AdventOfCode2025
                 }
 
             }
-            Console.WriteLine("the bigest one it of size " + maxSize);
+            return maxSize;
         }
 
 
-        public static void SolveTwo()
+        public static Int128 SolveTwo()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day9.txt");
             string[] rows = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -143,12 +143,10 @@ namespace AdventOfCode2025
             {
                 if (IsAValidRectangle((item.Item1, item.Item2), (item.Item3, item.Item4), pavement))
                 {
-                    Console.WriteLine(item.Item1 + " " + item.Item2 + " " + item.Item3 + " " + item.Item4);
-                    Console.WriteLine("the bigest one it of size " + item.Item5);
-                    break;
+                    return item.Item5;
                 }
             }
-
+            throw new Exception();
         }
 
         public static bool IsAValidRectangle((int x, int y) point1, (int x, int y) point2, char[][] table)

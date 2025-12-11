@@ -6,7 +6,7 @@ namespace AdventOfCode2025
 {
     public static class Day4
     {
-        public static void SolveOne()
+        public static Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day4.txt");
             string[] inputs1D = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -79,12 +79,12 @@ namespace AdventOfCode2025
                 }
 
             }
-            Console.WriteLine("you can acces :" + canAccsess);
+            return canAccsess;
 
         }
 
 
-        public static void SolveTwo()
+        public static Int128 SolveTwo()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day4.txt");
             string[] inputs1D = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -165,7 +165,7 @@ namespace AdventOfCode2025
                 }
 
             } while (didRemove);
-            Console.WriteLine("you can acces :" + canAccsess);
+            return canAccsess;
 
         }
 

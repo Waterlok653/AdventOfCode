@@ -67,7 +67,7 @@ namespace AdventOfCode2025
     public static class Day10Part2
     {
 
-        public static void Solve()
+        public static Int128 Solve()
         {
 
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");
@@ -158,8 +158,7 @@ namespace AdventOfCode2025
                     }
                 }
             }
-
-            Console.WriteLine("You need to press that many button : " + sumOfPress);
+            return sumOfPress;
         }
     }
 }

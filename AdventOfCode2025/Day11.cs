@@ -15,7 +15,7 @@ namespace AdventOfCode2025
     public static class Day11
     {
         static Dictionary<(Day11Object, bool fft, bool dac), Int128> DidVisite = new Dictionary<(Day11Object, bool fft, bool dac), Int128>();
-        public static void SolveOne()
+        public static Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day11.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -39,7 +39,7 @@ namespace AdventOfCode2025
             }
 
             var sum = FindPathToOutput(allServer.Where(t => t.Name.Equals("you")).First(), false, false, false);
-            Console.WriteLine("Ther is that many way to go to output " + sum);
+            return sum;
         }
 
         private static int FindPathToOutput(Day11Object current, bool NeedToVisitDACandFFT, bool didVisiteDac, bool didVisitFFT, string wentby = "")
@@ -96,7 +96,7 @@ namespace AdventOfCode2025
             return sum;
         }
 
-        public static void SolveTwo()
+        public static Int128 SolveTwo()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day11.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -122,7 +122,7 @@ namespace AdventOfCode2025
             }
             var sum = FindPathToOutputVia(allServer.Where(t => t.Name.Equals("svr")).First(), false, false);
 
-            Console.WriteLine("Ther is that many way to go to output " + sum);
+            return sum;
         }
     }
 }

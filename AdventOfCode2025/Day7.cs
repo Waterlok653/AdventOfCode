@@ -8,7 +8,7 @@ namespace AdventOfCode2025
 {
     public static class Day7
     {
-        public static void SolveOne()
+        public static Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day7.txt");
             string[] row = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -42,13 +42,13 @@ namespace AdventOfCode2025
                 }
             }
 
-            Console.WriteLine("Total spliut beam :" + total);
+            return total;
 
 
         }
 
 
-        public static void SolveTwo()
+        public static Int128 SolveTwo()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day7.txt");
             string[] row = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -89,7 +89,7 @@ namespace AdventOfCode2025
             }
             
 
-            Console.WriteLine("Total spliut beam :" + total);
+            return total;
 
 
         }

@@ -6,7 +6,7 @@ namespace AdventOfCode2025
 {
     public static class Day2
     {
-        public static void SolveOne()
+        public static Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day2.txt");
             string[] inputs = input.Split(",");
@@ -38,11 +38,11 @@ namespace AdventOfCode2025
 
                 }
             }
-            Console.WriteLine("Sum of invalid :" + NbNotOk.Sum());
+            return NbNotOk.Sum();
         }
 
 
-        public static void SolveTwo()
+        public static Int128 SolveTwo()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day2.txt");
             string[] inputs = input.Split(",");
@@ -96,7 +96,7 @@ namespace AdventOfCode2025
                     }
                 }
             }
-            Console.WriteLine("Sum of invalid :" + NbNotOk.Sum());
+            return NbNotOk.Sum();
         }
 
     }
