@@ -16,22 +16,22 @@ namespace AdventOfCode2025
     }
     public class VectorV2
     {
-        public int[] Vector = new int[0];
+        public double[] Vector = new double[0];
         public VectorV2()
         {
 
         }
         public VectorV2(int size)
         {
-            Vector = new int[size];
+            Vector = new double[size];
         }
-        public VectorV2(int[] vector)
+        public VectorV2(double[] vector)
         {
             Vector = vector;
         }
-        public int GetLegth()
+        public double GetLegth()
         {
-            int result = 0;
+            double result = 0;
             foreach (var item in Vector)
             {
                 result += item * item;
@@ -41,7 +41,7 @@ namespace AdventOfCode2025
         public VectorV2 MultiplyBy(int scalair)
         {
             var newVector = new VectorV2();
-            newVector.Vector = new int[Vector.Length];
+            newVector.Vector = new double[Vector.Length];
             for (int i = 0; i < Vector.Length; i++)
             {
                 newVector.Vector[i] = scalair * Vector[i];
@@ -56,7 +56,7 @@ namespace AdventOfCode2025
             }
 
             var newVector = new VectorV2();
-            newVector.Vector = new int[Vector.Length];
+            newVector.Vector = new double[Vector.Length];
             for (int i = 0; i < Vector.Length; i++)
             {
                 newVector.Vector[i] = vector.Vector[i] + Vector[i];
@@ -133,9 +133,9 @@ namespace AdventOfCode2025
                         IntExpr rowSum = ctx.MkInt(0);
                         for (int j = 0; j < machine.Vector.Length; j++)
                         {
-                            rowSum = (IntExpr)ctx.MkAdd(rowSum, ctx.MkMul(ctx.MkInt(machine.Vector[j].Vector[i]), scalar[j]));
+                            rowSum = (IntExpr)ctx.MkAdd(rowSum, ctx.MkMul(ctx.MkInt((int)machine.Vector[j].Vector[i]), scalar[j]));
                         }
-                        opt.Assert(ctx.MkEq(rowSum, ctx.MkInt(machine.Jolitage.Vector[i])));
+                        opt.Assert(ctx.MkEq(rowSum, ctx.MkInt((int)machine.Jolitage.Vector[i])));
                     }
 
                     IntExpr sumOfScalar = (IntExpr)ctx.MkInt(0);

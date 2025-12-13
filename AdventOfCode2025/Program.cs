@@ -8,7 +8,7 @@ namespace AdventOfCode2025
         static void Main(string[] args)
         {
             baselineMemory = GC.GetTotalMemory(true);
-            RunPart("Day 10", "Part 2", () => Day10Part2NoNuget.Solve());
+            //RunPart("Day 10", "Part 2", () => Day10Part2NoNuget.Solve());
 
             RunPart("Day 1", "Part 1", () => Day1.SolveOne());
             RunPart("Day 1", "Part 2", () => Day1.SolveTwo());
@@ -42,6 +42,8 @@ namespace AdventOfCode2025
 
             RunPart("Day 11", "Part 1", () => Day11.SolveOne());
             RunPart("Day 11", "Part 2", () => Day11.SolveTwo());
+
+            RunPart("Day 12", "Part 1", () => Day12.SolveOne());
         }
         static void RunPart(string day, string part, Func<object?> action)
         {
@@ -68,6 +70,7 @@ namespace AdventOfCode2025
             else
                 formattedTime = $"{duration.TotalMinutes:F2} min";
 
+            formattedTime = $"{duration.TotalMilliseconds:F2} ms";
             // Format RAM usage
             string FormatBytes(long bytes)
             {
