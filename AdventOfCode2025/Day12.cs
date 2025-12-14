@@ -197,7 +197,7 @@ namespace AdventOfCode2025
     {
         public static Int128 SolveOne()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day12.txt");
+            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day12.test.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
 
             int numberOfShape = 0;
@@ -276,22 +276,6 @@ namespace AdventOfCode2025
                     continue;
                 }
                 region.BuildAllPosibleShapeInIt();
-                /*foreach (var item in region.AllPosibleShapeInIt)
-                {
-                    foreach (var item2 in item.Item2)
-                    {
-
-                        Console.WriteLine();
-                        for (int o = 0; o < item2.Shape.Length; o++)
-                        {
-                            for (int f = 0; f < item2.Shape[o].Vector.Length; f++)
-                            {
-                                Console.Write(item2.Shape[o].Vector[f]);
-                            }
-                            Console.WriteLine();
-                        }
-                    }
-                }*/
 
                 using (Context ctx = new Context())
                 {
