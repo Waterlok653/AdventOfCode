@@ -18,7 +18,7 @@ namespace AdventOfCode2025
 
     public static class Day10
     {
-        private static int[][] allShape = new int[0][];
+        public static int[][] AllShape = new int[0][];
         public static Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");
@@ -152,7 +152,7 @@ namespace AdventOfCode2025
         {
             if (current.Count == 0)
             {
-                current.Add(new int[allShape[0].Length]);
+                current.Add(new int[AllShape[0].Length]);
             }
             if (numberOfPresse == 0)
             {
@@ -161,7 +161,7 @@ namespace AdventOfCode2025
 
             var newCurrent = new List<int[]>();
 
-            foreach (var shape in allShape)
+            foreach (var shape in AllShape)
             {
                 foreach (var item in current)
                 {
@@ -265,10 +265,10 @@ namespace AdventOfCode2025
             {
                 Console.WriteLine(ccc++);
                 bool hasFound = false;
-                allShape = new int[machine.Buttons.Length][];
+                AllShape = new int[machine.Buttons.Length][];
                 for (int i = 0; i < machine.Buttons.Length; i++)
                 {
-                    allShape[i] = ConverteNumberToBinary(int.Parse(Math.Pow(2, i).ToString()), machine.Buttons.Length, out bool RAF).ToCharArray().Select(t => int.Parse(t.ToString())).ToArray(); ;
+                    AllShape[i] = ConverteNumberToBinary(int.Parse(Math.Pow(2, i).ToString()), machine.Buttons.Length, out bool RAF).ToCharArray().Select(t => int.Parse(t.ToString())).ToArray(); ;
                 }
                 bool isFirstTime = true;
                 List<int[]> all = new List<int[]>();
