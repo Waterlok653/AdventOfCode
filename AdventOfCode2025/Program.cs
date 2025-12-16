@@ -4,10 +4,8 @@ namespace AdventOfCode2025
 {
     internal class Program
     {
-        static long baselineMemory;
         static void Main(string[] args)
         {
-            baselineMemory = GC.GetTotalMemory(true);
             var program = new Program();
 
             var day1 = new Day1();
@@ -68,14 +66,9 @@ namespace AdventOfCode2025
             Console.WriteLine($"| {day} - {part} ");
             Console.WriteLine("+--------------------------------------------+");
 
-            long memoryBefore = GC.GetTotalMemory(true);
-
             var start = DateTime.Now;
             object? result = action();
             var duration = DateTime.Now - start;
-
-            long memoryAfter = GC.GetTotalMemory(false);
-            long ramUsed = memoryAfter - memoryBefore;          // RAM used by this action
 
             // Format duration
             string formattedTime;
@@ -85,19 +78,9 @@ namespace AdventOfCode2025
                 formattedTime = $"{duration.TotalSeconds:F2} s";
             else
                 formattedTime = $"{duration.TotalMinutes:F2} min";
-
             formattedTime = $"{duration.TotalMilliseconds:F2} ms";
-            // Format RAM usage
-            string FormatBytes(long bytes)
-            {
-                if (bytes < 1024) return $"{bytes} B";
-                if (bytes < 1024L * 1024) return $"{bytes / 1024.0:F2} KB";
-                if (bytes < 1024L * 1024 * 1024) return $"{bytes / (1024.0 * 1024):F2} MB";
-                return $"{bytes / (1024.0 * 1024 * 1024):F2} GB";
-            }
 
             Console.WriteLine($"Duration       : {formattedTime}");
-            Console.WriteLine($"RAM Used Part  : {FormatBytes(ramUsed)}");
             Console.WriteLine($"Result         : {result}");
             Console.WriteLine();
         }

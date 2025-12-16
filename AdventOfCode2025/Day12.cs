@@ -111,7 +111,7 @@ namespace AdventOfCode2025
                         currentShape = Miror(currentShape);
                     }
 
-                    if (returnValue.Count == 0 || returnValue.Where(o => o.EqualsV2(new Pressent(currentShape, Id))).Count() == 0)
+                    if (returnValue.Count == 0 || !returnValue.Any(o => o.EqualsV2(new Pressent(currentShape, Id))))
                     {
                         returnValue.Add(new Pressent(currentShape, Id));
                     }
@@ -192,7 +192,7 @@ namespace AdventOfCode2025
             return newVector;
         }
     }
-    public class Day12
+    public partial class Day12
     {
         public Int128 SolveOne()
         {
@@ -202,7 +202,7 @@ namespace AdventOfCode2025
             int numberOfShape = 0;
             foreach (var item in inputs)
             {
-                if (Regex.Match(item, @"^[0-9]:$").Success)
+                if (RegexGetNameOfPackage().IsMatch(item))
                 {
                     numberOfShape++;
                 }
@@ -225,15 +225,15 @@ namespace AdventOfCode2025
             int currentLineInShape = -1;
             foreach (var i in inputs)
             {
-                if (Regex.Match(i, @"^[0-9]:$").Success)
+                if (RegexGetNameOfPackage().IsMatch(i))
                 {
-                    currentShape = int.Parse(Regex.Match(i, @"[0-9]:$").Value[..^1]);
+                    currentShape = int.Parse(RegexGetNameOfPackage().Match(i).Value[..^1]);
                     currentLineInShape = 0;
                     continue;
                 }
-                if (currentShape != -1 && Regex.Match(i, @"^(#|\.)+$").Success)
+                if (currentShape != -1 && RegexIsLineOfPackage().IsMatch(i))
                 {
-                    var line = Regex.Match(i, @"^(#|\.)+$").Value;
+                    var line = RegexIsLineOfPackage().Match(i).Value;
                     allShape[currentShape].Id = currentShape;
                     for (int j = 0; j < allShape[currentShape].Shape[currentLineInShape].Vector.Length; j++)
                     {
@@ -244,7 +244,7 @@ namespace AdventOfCode2025
                     }
                     currentLineInShape++;
                 }
-                if (Regex.Match(i, @"^[0-9]+x[0-9]+\:").Success)
+                if (RegexGetDimentions().IsMatch(i))
                 {
                     var line = i.Split(":");
                     var xy = line[0].Split("x");
@@ -337,5 +337,12 @@ namespace AdventOfCode2025
             }
             return sumCorrect;
         }
+
+        [GeneratedRegex(@"^[0-9]:$")]
+        private static partial Regex RegexGetNameOfPackage();
+        [GeneratedRegex(@"^[0-9]+x[0-9]+\:")]
+        private static partial Regex RegexGetDimentions();
+        [GeneratedRegex(@"^(#|\.)+$")]
+        private static partial Regex RegexIsLineOfPackage();
     }
 }

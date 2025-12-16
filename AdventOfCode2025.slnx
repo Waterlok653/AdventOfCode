@@ -1,3 +1,9 @@
 <Solution>
-  <Project Path="AdventOfCode2025/AdventOfCode2025.csproj" />
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="AdventOfCode2025/AdventOfCode2025.csproj">
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
 </Solution>

@@ -64,7 +64,7 @@ namespace AdventOfCode2025
             return newVector;
         }
     }
-    public class Day10Part2Z3
+    public partial class Day10Part2Z3
     {
 
         public Int128 Solve()
@@ -80,7 +80,7 @@ namespace AdventOfCode2025
                 var newObject = new Day10Part2Object();
                 var currentLine = item;
 
-                var voltages = Regex.Match(currentLine, @"\{\S*\}").ToString();
+                var voltages = RegexVoltage().Match(currentLine).ToString();
                 newObject.Jolitage = new VectorV2(voltages[1..^1].Split(",").Length);
                 int i = 0;
                 foreach (var voltage in voltages[1..^1].Split(","))
@@ -89,7 +89,7 @@ namespace AdventOfCode2025
                 }
 
 
-                currentLine = currentLine.Replace(Regex.Match(currentLine, @"\[[.#]*\]").ToString(), "");
+                currentLine = currentLine.Replace(GetLightPartFromInput().Match(currentLine).ToString(), "");
                 currentLine = currentLine.Replace(voltages, "");
 
                 currentLine = currentLine.Trim();
@@ -105,7 +105,6 @@ namespace AdventOfCode2025
                 foreach (var light in allButon)
                 {
                     var allWire = light[1..^1].Split(",");
-                    int j = 0;
                     foreach (var wire in allWire)
                     {
                         newObject.Vector[i].Vector[int.Parse(wire)] = 1;
@@ -159,5 +158,10 @@ namespace AdventOfCode2025
             }
             return sumOfPress;
         }
+
+        [GeneratedRegex(@"\{\S*\}")]
+        private static partial Regex RegexVoltage();
+        [GeneratedRegex(@"\[[.#]*\]")]
+        private static partial Regex GetLightPartFromInput();
     }
 }

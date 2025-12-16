@@ -102,7 +102,7 @@ namespace AdventOfCode2025
                 pos++;
             }
             int canAccsess = 0;
-            bool didRemove = false;
+            bool didRemove;
             do
             {
                 didRemove = false;

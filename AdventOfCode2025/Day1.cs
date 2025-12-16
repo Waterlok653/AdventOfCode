@@ -9,7 +9,7 @@ namespace AdventOfCode2025
         public Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day1.txt");
-            string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
+            string[] inputs = input.Split(["\r\n", "\n\r", "\r", "\n"], StringSplitOptions.None);
             int position = 50;
             int total0 = 0;
             foreach (var line in inputs.Where(s => s.Length != 0).ToArray())
@@ -25,7 +25,7 @@ namespace AdventOfCode2025
         public int RotateOne(string line, int position)
         {
             char direction = line[0];
-            int distance = int.Parse(line.Substring(1));
+            int distance = int.Parse(line[1..]);
             switch (direction)
             {
                 case 'R':
@@ -58,7 +58,7 @@ namespace AdventOfCode2025
         {
             int initialPosition = position;
             char direction = line[0];
-            int distance = int.Parse(line.Substring(1));
+            int distance = int.Parse(line[1..]);
             switch (direction)
             {
                 case 'R':

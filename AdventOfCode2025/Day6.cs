@@ -39,7 +39,7 @@ namespace AdventOfCode2025
             for (int i = 0; i < clean2D[0].Length; i++)
             {
                 long result = 0;
-                string stringOperator = clean2D[clean2D.Length - 1][i];
+                string stringOperator = clean2D[^1][i];
                 for (int j = 0; j < clean2D.Length - 1; j++)
                 {
                     if (stringOperator.Equals("+"))
@@ -81,15 +81,15 @@ namespace AdventOfCode2025
             List<string> mathOperator = new List<string>();
 
 
-            for (int i = 0; i < cleanInputs[cleanInputs.Length - 1].Length; i++)
+            for (int i = 0; i < cleanInputs[^1].Length; i++)
             {
-                mathOperator.Add(cleanInputs[cleanInputs.Length - 1][i].ToString());
+                mathOperator.Add(cleanInputs[^1][i].ToString());
             }
             bool didRm = false;
             do
             {
                 didRm = false;
-                if (mathOperator.Where(g => g.Trim().Equals("")).Count() != 0)
+                if (mathOperator.Any(g => g.Trim().Equals("")))
                 {
                     mathOperator.Remove(mathOperator.Where(g => g.Trim().Equals("")).First());
                     didRm = true;

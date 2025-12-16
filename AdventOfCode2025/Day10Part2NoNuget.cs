@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode2025
 {
-    public class Day10Part2NoNuget
+    public partial class Day10Part2NoNuget
     {
 
         public Int128 Solve()
@@ -24,7 +24,7 @@ namespace AdventOfCode2025
                 var newObject = new Day10Part2Object();
                 var currentLine = item;
 
-                var voltages = Regex.Match(currentLine, @"\{\S*\}").ToString();
+                var voltages = RegexVoltage().Match(currentLine).ToString();
                 newObject.Jolitage = new VectorV2(voltages[1..^1].Split(",").Length);
                 int i = 0;
                 foreach (var voltage in voltages[1..^1].Split(","))
@@ -33,7 +33,7 @@ namespace AdventOfCode2025
                 }
 
 
-                currentLine = currentLine.Replace(Regex.Match(currentLine, @"\[[.#]*\]").ToString(), "");
+                currentLine = currentLine.Replace(GetLightPartFromInput().Match(currentLine).ToString(), "");
                 currentLine = currentLine.Replace(voltages, "");
 
                 currentLine = currentLine.Trim();
@@ -49,7 +49,6 @@ namespace AdventOfCode2025
                 foreach (var light in allButon)
                 {
                     var allWire = light[1..^1].Split(",");
-                    int j = 0;
                     foreach (var wire in allWire)
                     {
                         newObject.Vector[i].Vector[int.Parse(wire)] = 1;
@@ -59,10 +58,10 @@ namespace AdventOfCode2025
                 list.Add(newObject);
             }
             int sumOfPress = 0;
-            Parallel.ForEach(list, machine => 
+            Parallel.ForEach(list, machine =>
             {
                 Interlocked.Add(ref sumOfPress, GetNumberOfPress(machine));
-                });
+            });
             return sumOfPress;
         }
 
@@ -76,7 +75,7 @@ namespace AdventOfCode2025
                 {
                     matrix[j][i] = machine.Vector[i].Vector[j];
                 }
-                matrix[j][matrix[j].Length - 1] = machine.Jolitage.Vector[j];
+                matrix[j][^1] = machine.Jolitage.Vector[j];
             }
             matrix = GaussianElimination(matrix);
             List<double> allNotPivotColumn = new List<double>();
@@ -89,14 +88,14 @@ namespace AdventOfCode2025
             }
             for (int i = 0; i < matrix[0].Length - 1; i++)
             {
-                if (allPivot.Where(p => p.pivot.index == i).Count() == 0)
+                if (!allPivot.Any(p => p.pivot.index == i))
                 {
                     allNotPivotColumn.Add(i);
                 }
             }
             if (allNotPivotColumn.Count == 0)
             {
-                return (int)matrix.Sum(t => t[t.Length - 1]);
+                return (int)matrix.Sum(t => t[^1]);
             }
             Day10 day10 = new Day10();
             day10.AllShape = new int[allNotPivotColumn.Count][];
@@ -126,7 +125,7 @@ namespace AdventOfCode2025
                     var newMatrix = new double[matrix.Length];
                     for (int i = 0; i < matrix.Length; i++)
                     {
-                        newMatrix[i] = matrix[i][matrix[i].Length - 1];
+                        newMatrix[i] = matrix[i][^1];
                         for (int j = 0; j < matrix[i].Length - 1; j++)
                         {
                             if (allNotPivotColumn.Contains(j))
@@ -134,7 +133,7 @@ namespace AdventOfCode2025
                                 newMatrix[i] -= testInput[allNotPivotColumn.IndexOf(j)] * matrix[i][j];
                             }
                         }
-                        if ((Math.Round(newMatrix[i], 3) < 0 && Math.Round(matrix[i][matrix[i].Length - 1], 3) > 0))
+                        if ((Math.Round(newMatrix[i], 3) < 0 && Math.Round(matrix[i][^1], 3) > 0))
                         {
                             isNotPossible = true;
                             break;
@@ -299,9 +298,7 @@ namespace AdventOfCode2025
         {
             for (int i = 0; i < matrix[rowOne].Length; i++)
             {
-                var tmp = matrix[rowOne][i];
-                matrix[rowOne][i] = matrix[rowTwo][i];
-                matrix[rowTwo][i] = tmp;
+                (matrix[rowTwo][i], matrix[rowOne][i]) = (matrix[rowOne][i], matrix[rowTwo][i]);
             }
             return matrix;
         }
@@ -325,5 +322,10 @@ namespace AdventOfCode2025
             }
             return matrix;
         }
+
+        [GeneratedRegex(@"\{\S*\}")]
+        private static partial Regex RegexVoltage();
+        [GeneratedRegex(@"\[[.#]*\]")]
+        private static partial Regex GetLightPartFromInput();
     }
 }

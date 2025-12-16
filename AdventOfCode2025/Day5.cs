@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode2025
 {
-    public class Day5
+    public partial class Day5
     {
         public Int128 SolveOne()
         {
@@ -20,7 +20,7 @@ namespace AdventOfCode2025
                 {
                     continue;
                 }
-                if (Regex.Match(item, @"^[0-9]*-[0-9]*$").Success)
+                if (RegexIsRangeInput().IsMatch(item))
                 {
                     var numbers = item.Split('-');
                     fresh.Add((long.Parse(numbers[0]), long.Parse(numbers[1])));
@@ -63,7 +63,7 @@ namespace AdventOfCode2025
                 {
                     continue;
                 }
-                if (Regex.Match(item, @"^[0-9]*-[0-9]*$").Success)
+                if (RegexIsRangeInput().IsMatch(item))
                 {
                     var numbers = item.Split('-');
                     fresh.Add((long.Parse(numbers[0]), long.Parse(numbers[1])));
@@ -72,8 +72,8 @@ namespace AdventOfCode2025
                 break;
             }
             bool didchange;
-            List<(long, long)> newFresh = new List<(long, long)>();
-            List<(long, long)> toRm = new List<(long, long)>();
+            List<(long, long)> newFresh;
+            List<(long, long)> toRm;
             do
             {
                 newFresh = new List<(long, long)>();
@@ -143,5 +143,7 @@ namespace AdventOfCode2025
 
         }
 
+        [GeneratedRegex(@"^[0-9]*-[0-9]*$")]
+        private static partial Regex RegexIsRangeInput();
     }
 }
