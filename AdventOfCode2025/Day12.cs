@@ -9,7 +9,6 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace AdventOfCode2025
 {
@@ -193,9 +192,9 @@ namespace AdventOfCode2025
             return newVector;
         }
     }
-    public static class Day12
+    public class Day12
     {
-        public static Int128 SolveOne()
+        public Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day12.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace AdventOfCode2025
 {
-    public static class Day1
+    public class Day1
     {
-        public static Int128 SolveOne()
+        public Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day1.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -22,7 +22,7 @@ namespace AdventOfCode2025
             }
             return total0;
         }
-        public static int RotateOne(string line, int position)
+        public int RotateOne(string line, int position)
         {
             char direction = line[0];
             int distance = int.Parse(line.Substring(1));
@@ -39,7 +39,7 @@ namespace AdventOfCode2025
             return (position % 100 + 100) % 100;
 
         }
-        public static Int128 SolveTwo()
+        public Int128 SolveTwo()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day1.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -54,7 +54,7 @@ namespace AdventOfCode2025
             }
             return total0;
         }
-        public static (int, int) RotateTwo(string line, int position)
+        public (int, int) RotateTwo(string line, int position)
         {
             int initialPosition = position;
             char direction = line[0];

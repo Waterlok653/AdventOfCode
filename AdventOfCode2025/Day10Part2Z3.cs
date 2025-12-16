@@ -64,10 +64,10 @@ namespace AdventOfCode2025
             return newVector;
         }
     }
-    public static class Day10Part2Z3
+    public class Day10Part2Z3
     {
 
-        public static Int128 Solve()
+        public Int128 Solve()
         {
 
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");

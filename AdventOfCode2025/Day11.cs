@@ -12,10 +12,10 @@ namespace AdventOfCode2025
         public List<Day11Object> LeadTo;
         public List<Day11Object> CommeFrom;
     }
-    public static class Day11
+    public class Day11
     {
-        static Dictionary<(Day11Object, bool fft, bool dac), Int128> DidVisite = new Dictionary<(Day11Object, bool fft, bool dac), Int128>();
-        public static Int128 SolveOne()
+        Dictionary<(Day11Object, bool fft, bool dac), Int128> DidVisite = new Dictionary<(Day11Object, bool fft, bool dac), Int128>();
+        public Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day11.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -42,7 +42,7 @@ namespace AdventOfCode2025
             return sum;
         }
 
-        private static int FindPathToOutput(Day11Object current, bool NeedToVisitDACandFFT, bool didVisiteDac, bool didVisitFFT, string wentby = "")
+        private int FindPathToOutput(Day11Object current, bool NeedToVisitDACandFFT, bool didVisiteDac, bool didVisitFFT, string wentby = "")
         {
             int sum = 0;
             if (current.Name.Equals("fft"))
@@ -68,7 +68,7 @@ namespace AdventOfCode2025
             return sum;
         }
 
-        private static Int128 FindPathToOutputVia(Day11Object current, bool didPassByFFT, bool didPassByDAC)
+        private Int128 FindPathToOutputVia(Day11Object current, bool didPassByFFT, bool didPassByDAC)
         {
             Int128 sum = 0;
             if (current.Name.Equals("fft"))
@@ -96,7 +96,7 @@ namespace AdventOfCode2025
             return sum;
         }
 
-        public static Int128 SolveTwo()
+        public Int128 SolveTwo()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day11.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);

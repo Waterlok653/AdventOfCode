@@ -15,9 +15,9 @@ namespace AdventOfCode2025
 		public long groupe;
 		public List<Day8Object> connectedTo = new List<Day8Object>();
 	}
-	public static class Day8
+	public class Day8
 	{
-		public static Int128 SolveOne()
+		public Int128 SolveOne()
 		{
 			string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day8.txt");
 			string[] row = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -89,7 +89,7 @@ namespace AdventOfCode2025
 		}
 
 
-		public static Int128 SolveTwo()
+		public Int128 SolveTwo()
 		{
 			string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day8.txt");
 			string[] row = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);

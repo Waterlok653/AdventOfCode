@@ -9,10 +9,10 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode2025
 {
-    public static class Day10Part2NoNuget
+    public class Day10Part2NoNuget
     {
 
-        public static Int128 Solve()
+        public Int128 Solve()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -58,131 +58,132 @@ namespace AdventOfCode2025
                 }
                 list.Add(newObject);
             }
-            Int128 sumOfPress = 0;
-            foreach (var machine in list)
+            int sumOfPress = 0;
+            Parallel.ForEach(list, machine => 
             {
-                var matrix = new double[machine.Jolitage.Vector.Length][];
-                for (int j = 0; j < matrix.Length; j++)
-                {
-                    matrix[j] = new double[machine.Vector.Length + 1];
-                    for (int i = 0; i < machine.Vector.Length; i++)
-                    {
-                        matrix[j][i] = machine.Vector[i].Vector[j];
-                    }
-                    matrix[j][matrix[j].Length - 1] = machine.Jolitage.Vector[j];
-                }
-                matrix = GaussianElimination(matrix);
-                List<double> allNotPivotColumn = new List<double>();
-
-
-                List<((double value, int index) pivot, int row)> allPivot = new List<((double value, int index) pivot, int row)>();
-                for (int i = 0; i < matrix.Length; i++)
-                {
-                    allPivot.Add((GetPivotOfRow(matrix[i]), i));
-                }
-                for (int i = 0; i < matrix[0].Length - 1; i++)
-                {
-                    if (allPivot.Where(p => p.pivot.index == i).Count() == 0)
-                    {
-                        allNotPivotColumn.Add(i);
-                    }
-                }
-                if (allNotPivotColumn.Count == 0)
-                {
-                    File.AppendAllText("output1.txt", (int)matrix.Sum(t => t[t.Length - 1]) + "\n");
-                    sumOfPress += (int)matrix.Sum(t => t[t.Length - 1]);
-                    continue;
-                }
-                Day10.AllShape = new int[allNotPivotColumn.Count][];
-                List<int[]> allTestInput = new List<int[]>();
-                if (allNotPivotColumn.Count != 0)
-                {
-                    for (int i = 0; i < Day10.AllShape.Length; i++)
-                    {
-                        Day10.AllShape[i] = Day10.ConverteNumberToBinary(int.Parse(Math.Pow(2, i).ToString()), Day10.AllShape.Length, out bool RAF).ToCharArray().Select(t => int.Parse(t.ToString())).ToArray(); ;
-                    }
-                    allTestInput.AddRange(Day10.GetAllCombination(0, new List<int[]>()));
-
-                }
-                else
-                {
-                    allTestInput.Add(new int[] { 0 });
-                }
-
-                List<int[]> toAdd = new List<int[]>();
-                var minPress = int.MaxValue;
-                do
-                {
-                    toAdd.Clear();
-                    foreach (var testInput in allTestInput)
-                    {
-                        var isNotPossible = false;
-                        var newMatrix = new double[matrix.Length];
-                        for (int i = 0; i < matrix.Length; i++)
-                        {
-                            newMatrix[i] = matrix[i][matrix[i].Length - 1];
-                            for (int j = 0; j < matrix[i].Length - 1; j++)
-                            {
-                                if (allNotPivotColumn.Contains(j))
-                                {
-                                    newMatrix[i] -= testInput[allNotPivotColumn.IndexOf(j)] * matrix[i][j];
-                                }
-                            }
-                            if ((Math.Round(newMatrix[i],3) < 0 && Math.Round(matrix[i][matrix[i].Length - 1], 3) > 0))
-                            {
-                                isNotPossible = true;
-                                break;
-                            }
-                        }
-                        if (isNotPossible)
-                        {
-                            allTestInput.Remove(testInput);
-                            break;
-                        }
-                        toAdd.Add(testInput);
-                        var nbPress = newMatrix.Sum(t => Math.Abs(t)) + testInput.Sum(t => Math.Abs(t));
-
-                        if (minPress > nbPress)
-                        {
-                            bool areAllNumberInt = true;
-                            for (int j = 0; j < newMatrix.Length - 1; j++)
-                            {
-                                var value = Math.Round(newMatrix[j], 3);
-                                if (Math.Round(value - Math.Truncate(value), 3) != 0 || value < 0)
-                                {
-                                    areAllNumberInt = false;
-                                    break;
-                                }
-
-                            }
-                            if (areAllNumberInt)
-                                minPress = (int)Math.Round(nbPress);
-                        }
-                        break;
-                    }
-                    if (toAdd.Count > 0)
-                    {
-                        allTestInput.AddRange(Day10.GetAllCombination(1, toAdd));
-                        allTestInput = allTestInput.DistinctBy(e => string.Join(",", e)).ToList();
-                        allTestInput.Remove(toAdd.First());
-                    }
-                } while (allTestInput.Count != 0);
-                //problemme quand le resulta final est negatif
-                File.AppendAllText("output1.txt", minPress + "\n");
-                sumOfPress += minPress;
-            }
+                Interlocked.Add(ref sumOfPress, GetNumberOfPress(machine));
+                });
             return sumOfPress;
         }
 
+        private int GetNumberOfPress(Day10Part2Object machine)
+        {
+            var matrix = new double[machine.Jolitage.Vector.Length][];
+            for (int j = 0; j < matrix.Length; j++)
+            {
+                matrix[j] = new double[machine.Vector.Length + 1];
+                for (int i = 0; i < machine.Vector.Length; i++)
+                {
+                    matrix[j][i] = machine.Vector[i].Vector[j];
+                }
+                matrix[j][matrix[j].Length - 1] = machine.Jolitage.Vector[j];
+            }
+            matrix = GaussianElimination(matrix);
+            List<double> allNotPivotColumn = new List<double>();
 
-        public static double[][] GaussianElimination(double[][] matrix)
-        {            
+
+            List<((double value, int index) pivot, int row)> allPivot = new List<((double value, int index) pivot, int row)>();
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                allPivot.Add((GetPivotOfRow(matrix[i]), i));
+            }
+            for (int i = 0; i < matrix[0].Length - 1; i++)
+            {
+                if (allPivot.Where(p => p.pivot.index == i).Count() == 0)
+                {
+                    allNotPivotColumn.Add(i);
+                }
+            }
+            if (allNotPivotColumn.Count == 0)
+            {
+                return (int)matrix.Sum(t => t[t.Length - 1]);
+            }
+            Day10 day10 = new Day10();
+            day10.AllShape = new int[allNotPivotColumn.Count][];
+            List<int[]> allTestInput = new List<int[]>();
+            if (allNotPivotColumn.Count != 0)
+            {
+                for (int i = 0; i < day10.AllShape.Length; i++)
+                {
+                    day10.AllShape[i] = day10.ConverteNumberToBinary(int.Parse(Math.Pow(2, i).ToString()), day10.AllShape.Length, out bool RAF).ToCharArray().Select(t => int.Parse(t.ToString())).ToArray(); ;
+                }
+                allTestInput.AddRange(day10.GetAllCombination(0, new List<int[]>()));
+
+            }
+            else
+            {
+                allTestInput.Add(new int[] { 0 });
+            }
+
+            List<int[]> toAdd = new List<int[]>();
+            var minPress = int.MaxValue;
+            do
+            {
+                toAdd.Clear();
+                foreach (var testInput in allTestInput)
+                {
+                    var isNotPossible = false;
+                    var newMatrix = new double[matrix.Length];
+                    for (int i = 0; i < matrix.Length; i++)
+                    {
+                        newMatrix[i] = matrix[i][matrix[i].Length - 1];
+                        for (int j = 0; j < matrix[i].Length - 1; j++)
+                        {
+                            if (allNotPivotColumn.Contains(j))
+                            {
+                                newMatrix[i] -= testInput[allNotPivotColumn.IndexOf(j)] * matrix[i][j];
+                            }
+                        }
+                        if ((Math.Round(newMatrix[i], 3) < 0 && Math.Round(matrix[i][matrix[i].Length - 1], 3) > 0))
+                        {
+                            isNotPossible = true;
+                            break;
+                        }
+                    }
+                    if (isNotPossible)
+                    {
+                        allTestInput.Remove(testInput);
+                        break;
+                    }
+                    toAdd.Add(testInput);
+                    var nbPress = newMatrix.Sum(t => Math.Abs(t)) + testInput.Sum(t => Math.Abs(t));
+
+                    if (minPress > nbPress)
+                    {
+                        bool areAllNumberInt = true;
+                        for (int j = 0; j < newMatrix.Length - 1; j++)
+                        {
+                            var value = Math.Round(newMatrix[j], 3);
+                            if (Math.Round(value - Math.Truncate(value), 3) != 0 || value < 0)
+                            {
+                                areAllNumberInt = false;
+                                break;
+                            }
+
+                        }
+                        if (areAllNumberInt)
+                            minPress = (int)Math.Round(nbPress);
+                    }
+                    break;
+                }
+                if (toAdd.Count > 0)
+                {
+                    allTestInput.AddRange(day10.GetAllCombination(1, toAdd));
+                    allTestInput = allTestInput.DistinctBy(e => string.Join(",", e)).ToList();
+                    allTestInput.Remove(toAdd.First());
+                }
+            } while (allTestInput.Count != 0);
+            return (minPress);
+        }
+
+        public double[][] GaussianElimination(double[][] matrix)
+        {
             matrix = PutAMatrixInRowEchelonForm(matrix);
             matrix = PutAMatrixInEchelonForm(matrix);
             matrix = PutAllPivotToOne(matrix);
             return matrix;
         }
-        public static double[][] PutAllPivotToOne(double[][] matrix)
+        public double[][] PutAllPivotToOne(double[][] matrix)
         {
             for (int i = matrix.Length - 1; i >= 0; i--)
             {
@@ -199,7 +200,7 @@ namespace AdventOfCode2025
             }
             return matrix;
         }
-        public static double[][] PutAMatrixInEchelonForm(double[][] matrix)
+        public double[][] PutAMatrixInEchelonForm(double[][] matrix)
         {
             for (int i = matrix.Length - 1; i >= 0; i--)
             {
@@ -217,7 +218,7 @@ namespace AdventOfCode2025
         }
 
 
-        public static double[][] PutAMatrixInRowEchelonForm(double[][] matrix)
+        public double[][] PutAMatrixInRowEchelonForm(double[][] matrix)
         {
             bool didChange = false;
             double[][] newMatrix = new double[matrix.Length][];
@@ -278,7 +279,7 @@ namespace AdventOfCode2025
                 return PutAMatrixInRowEchelonForm(newMatrix);
             return newMatrix;
         }
-        public static (double value, int index) GetPivotOfRow(double[] row)
+        public (double value, int index) GetPivotOfRow(double[] row)
         {
             int i = 0;
             if (row.Sum(h => Math.Abs(h)) == 0)
@@ -294,7 +295,7 @@ namespace AdventOfCode2025
                 i++;
             }
         }
-        public static double[][] InterchangeTwoRow(double[][] matrix, int rowOne, int rowTwo)
+        public double[][] InterchangeTwoRow(double[][] matrix, int rowOne, int rowTwo)
         {
             for (int i = 0; i < matrix[rowOne].Length; i++)
             {
@@ -304,7 +305,7 @@ namespace AdventOfCode2025
             }
             return matrix;
         }
-        public static double[][] MultiplyARowByAScalar(double[][] matrix, int row, double scalar)
+        public double[][] MultiplyARowByAScalar(double[][] matrix, int row, double scalar)
         {
             for (int i = 0; i < matrix[row].Length; i++)
             {
@@ -312,7 +313,7 @@ namespace AdventOfCode2025
             }
             return matrix;
         }
-        public static double[][] AddAScalarMultipleOfARowToAnother(double[][] matrix, int row, double scalar, int rowDest)
+        public double[][] AddAScalarMultipleOfARowToAnother(double[][] matrix, int row, double scalar, int rowDest)
         {
             for (int i = 0; i < matrix[row].Length; i++)
             {

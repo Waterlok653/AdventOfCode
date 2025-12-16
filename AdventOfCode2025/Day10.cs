@@ -16,10 +16,10 @@ namespace AdventOfCode2025
     }
 
 
-    public static class Day10
+    public class Day10
     {
-        public static int[][] AllShape = new int[0][];
-        public static Int128 SolveOne()
+        public int[][] AllShape = new int[0][];
+        public Int128 SolveOne()
         {
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -85,7 +85,7 @@ namespace AdventOfCode2025
             }
             return sumOfPress;
         }
-        public static string ConverteNumberToBinary(int input, int length, out bool tryEveryPosibility)
+        public string ConverteNumberToBinary(int input, int length, out bool tryEveryPosibility)
         {
             var currentInput = Convert.ToString(input, 2);
             while (currentInput.Length < length)
@@ -97,7 +97,7 @@ namespace AdventOfCode2025
             return currentInput;
 
         }
-        public static bool IsAGoodInput(Day10Object machine, int[] inputs)
+        public bool IsAGoodInput(Day10Object machine, int[] inputs)
         {
             bool[] currentStatus = new bool[machine.LightDiagram.Length];
             for (int i = 0; i < inputs.Length; i++)
@@ -120,7 +120,7 @@ namespace AdventOfCode2025
             return true;
         }
 
-        public static bool IsAGoodInputForVoltage(Day10Object machine, int[] inputs, out bool isImposible)
+        public bool IsAGoodInputForVoltage(Day10Object machine, int[] inputs, out bool isImposible)
         {
             isImposible = false;
             int[] currentStatus = new int[machine.Jolitage.Length];
@@ -148,7 +148,7 @@ namespace AdventOfCode2025
             return true;
         }
 
-        public static List<int[]> GetAllCombination(int numberOfPresse, List<int[]> current)
+        public List<int[]> GetAllCombination(int numberOfPresse, List<int[]> current)
         {
             if (current.Count == 0)
             {
@@ -176,7 +176,7 @@ namespace AdventOfCode2025
 
             return GetAllCombination(--numberOfPresse, newCurrent.DistinctBy(e => string.Join(",", e)).ToList());
         }
-        public static List<Int128> ConverteNumberToBasse(Int128 input, Int128 newBase, int length, int sumOfVoltage, out bool tryEveryPosibility, out bool isImposible)
+        public List<Int128> ConverteNumberToBasse(Int128 input, Int128 newBase, int length, int sumOfVoltage, out bool tryEveryPosibility, out bool isImposible)
         {
             tryEveryPosibility = false;
             List<Int128> newNumber = new List<Int128>();
@@ -215,7 +215,7 @@ namespace AdventOfCode2025
             return newNumber;
         }
 
-        public static Int128 SolveTwo()
+        public Int128 SolveTwo()
         {
 
             string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");

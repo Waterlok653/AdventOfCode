@@ -9,9 +9,9 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode2025
 {
-	public static class Day9
+	public class Day9
 	{
-		public static Int128 SolveOne()
+		public Int128 SolveOne()
 		{
 			string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day9.txt");
 			string[] rows = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -36,7 +36,7 @@ namespace AdventOfCode2025
 		}
 
 
-		public static Int128 SolveTwo()
+		public Int128 SolveTwo()
 		{
 			string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day9.txt");
 			string[] rows = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
@@ -115,7 +115,7 @@ namespace AdventOfCode2025
 			throw new Exception();
 		}
 
-		public static bool IsAValidRectangle((int x, int y) point1, (int x, int y) point2, ((int x, int y) point1, (int x, int y) point2)[] borders)
+		public bool IsAValidRectangle((int x, int y) point1, (int x, int y) point2, ((int x, int y) point1, (int x, int y) point2)[] borders)
 		{
 			var bigestX = Math.Max(point1.x, point2.x);
 			var bigestY = Math.Max(point1.y, point2.y);
@@ -125,7 +125,7 @@ namespace AdventOfCode2025
 			return GetAllBorderCollidingWithRectangle(borders, (smallestX + 1, smallestY + 1), (bigestX - 1, bigestY - 1)).Count == 0;
 		}
 
-		public static List<((int x, int y) point1, (int x, int y) point2)> GetAllBorderCollidingWithRectangle(((int x, int y) point1, (int x, int y) point2)[] borders, (int x, int y) point1, (int x, int y) point2)
+		public List<((int x, int y) point1, (int x, int y) point2)> GetAllBorderCollidingWithRectangle(((int x, int y) point1, (int x, int y) point2)[] borders, (int x, int y) point1, (int x, int y) point2)
 		{
 			var returnValue = new List<((int x, int y) point1, (int x, int y) point2)>();
 
