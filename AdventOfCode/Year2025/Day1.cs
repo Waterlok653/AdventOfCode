@@ -18,7 +18,7 @@
             }
             return total0;
         }
-        public int RotateOne(string line, int position)
+        private int RotateOne(string line, int position)
         {
             char direction = line[0];
             int distance = int.Parse(line[1..]);
@@ -50,7 +50,7 @@
             }
             return total0;
         }
-        public (int, int) RotateTwo(string line, int position)
+        private (int, int) RotateTwo(string line, int position)
         {
             int initialPosition = position;
             char direction = line[0];

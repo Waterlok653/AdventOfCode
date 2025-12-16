@@ -11,6 +11,19 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Z3" Version="4.12.2" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Year2015\" />
+    <Folder Include="Year2016\" />
+    <Folder Include="Year2017\" />
+    <Folder Include="Year2018\" />
+    <Folder Include="Year2019\" />
+    <Folder Include="Year2020\" />
+    <Folder Include="Year2021\" />
+    <Folder Include="Year2022\" />
+    <Folder Include="Year2023\" />
+    <Folder Include="Year2024\" />
+  </ItemGroup>
 
 	
 </Project>
