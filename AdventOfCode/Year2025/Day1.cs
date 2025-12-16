@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2025
+﻿namespace AdventOfCode.Year2025
 {
     public class Day1
     {
         public Int128 SolveOne()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day1.txt");
+            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day1.txt");
             string[] inputs = input.Split(["\r\n", "\n\r", "\r", "\n"], StringSplitOptions.None);
             int position = 50;
             int total0 = 0;
@@ -37,7 +37,7 @@
         }
         public Int128 SolveTwo()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day1.txt");
+            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day1.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
             int position = 50;
             int total0 = 0;

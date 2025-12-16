@@ -1,7 +1,7 @@
 ﻿using Microsoft.Z3;
 using System.Text.RegularExpressions;
 
-namespace AdventOfCode2025
+namespace AdventOfCode.Year2025
 {
     public class Region
     {
@@ -187,7 +187,7 @@ namespace AdventOfCode2025
     {
         public Int128 SolveOne()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day12.txt");
+            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day12.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
 
             int numberOfShape = 0;

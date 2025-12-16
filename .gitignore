@@ -363,4 +363,18 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Local input file
-/AdventOfCode2025/inputs/
+/AdventOfCode/Year2029/inputs/
+/AdventOfCode/Year2028/inputs/
+/AdventOfCode/Year2027/inputs/
+/AdventOfCode/Year2026/inputs/
+/AdventOfCode/Year2025/inputs/
+/AdventOfCode/Year2024/inputs/
+/AdventOfCode/Year2023/inputs/
+/AdventOfCode/Year2022/inputs/
+/AdventOfCode/Year2021/inputs/
+/AdventOfCode/Year2020/inputs/
+/AdventOfCode/Year2019/inputs/
+/AdventOfCode/Year2018/inputs/
+/AdventOfCode/Year2017/inputs/
+/AdventOfCode/Year2016/inputs/
+/AdventOfCode/Year2015/inputs/

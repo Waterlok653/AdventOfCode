@@ -1,13 +1,13 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AdventOfCode2025
+namespace AdventOfCode.Year2025
 {
     public partial class Day10Part2NoNuget
     {
 
         public Int128 Solve()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode2025\\AdventOfCode2025\\inputs\\day10.txt");
+            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day10.txt");
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
 
             List<Day10Part2Object> list = new List<Day10Part2Object>();
