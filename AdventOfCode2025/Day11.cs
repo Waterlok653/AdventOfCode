@@ -1,9 +1,4 @@
-﻿using Microsoft.Z3;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AdventOfCode2025
+﻿namespace AdventOfCode2025
 {
     public class Day11Object
     {
@@ -79,7 +74,7 @@ namespace AdventOfCode2025
             {
                 didPassByDAC = true;
             }
-            if (DidVisite.ContainsKey((current,didPassByFFT, didPassByDAC)))
+            if (DidVisite.ContainsKey((current, didPassByFFT, didPassByDAC)))
             {
                 return DidVisite[(current, didPassByFFT, didPassByDAC)];
             }

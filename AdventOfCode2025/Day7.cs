@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace AdventOfCode2025
+﻿namespace AdventOfCode2025
 {
     public class Day7
     {
@@ -67,17 +62,17 @@ namespace AdventOfCode2025
                     {
                         inputs[i][j + 1] = '|';
                         inputs[i][j - 1] = '|';
-                        currentAtPos[i, j + 1] += currentAtPos[i-1, j];
-                        currentAtPos[i, j - 1] += currentAtPos[i-1, j];
+                        currentAtPos[i, j + 1] += currentAtPos[i - 1, j];
+                        currentAtPos[i, j - 1] += currentAtPos[i - 1, j];
                     }
                     if (inputs[i][j] == '.' && i > 0 && inputs[i - 1][j] == '|')
                     {
                         inputs[i][j] = '|';
                         currentAtPos[i, j] += currentAtPos[i - 1, j];
                     }
-                    else if (inputs[i][j] == '|' && i < inputs.Length - 1 && inputs[i -1][j] == '|')
+                    else if (inputs[i][j] == '|' && i < inputs.Length - 1 && inputs[i - 1][j] == '|')
                     {
-                        currentAtPos[i, j] += currentAtPos[i-1, j];
+                        currentAtPos[i, j] += currentAtPos[i - 1, j];
                     }
                 }
             }
@@ -86,7 +81,7 @@ namespace AdventOfCode2025
             {
                 total = (ulong)currentAtPos[currentAtPos.GetLength(0) - 2, i] + total;
             }
-            
+
 
             return total;
 

@@ -1,6 +1,4 @@
-﻿using AdventOfCode2025;
-
-namespace AdventOfCode2025
+﻿namespace AdventOfCode2025
 {
     internal class Program
     {

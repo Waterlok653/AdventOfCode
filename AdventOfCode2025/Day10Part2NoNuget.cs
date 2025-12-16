@@ -1,11 +1,4 @@
-﻿using Microsoft.Z3;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Numerics;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode2025
 {

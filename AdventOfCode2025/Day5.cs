@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode2025
 {
@@ -125,7 +122,7 @@ namespace AdventOfCode2025
                     fresh.Add(item);
                     didchange = true;
                 }
-                foreach(var item in toRm)
+                foreach (var item in toRm)
                 {
                     fresh.Remove(item);
                     didchange = true;

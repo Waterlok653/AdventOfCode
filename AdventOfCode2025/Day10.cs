@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Numerics;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode2025
 {
@@ -166,7 +160,7 @@ namespace AdventOfCode2025
                 foreach (var item in current)
                 {
                     var newInput = new int[item.Length];
-                    for(int i = 0;i < newInput.Length; i++)
+                    for (int i = 0; i < newInput.Length; i++)
                     {
                         newInput[i] = item[i] + shape[i];
                     }
@@ -260,7 +254,7 @@ namespace AdventOfCode2025
                 list.Add(newObject);
             }
             Int128 sumOfPress = 0;
-            int ccc =0;
+            int ccc = 0;
             foreach (var machine in list)
             {
                 Console.WriteLine(ccc++);
@@ -303,7 +297,7 @@ namespace AdventOfCode2025
                 }
 
             }
-           return sumOfPress;
+            return sumOfPress;
 
         }
     }
