@@ -6,7 +6,7 @@ namespace AdventOfCode.Year2025
     {
         public Int128 SolveOne()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day5.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day5.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
             List<(long, long)> fresh = new List<(long, long)>();
             List<long> ingresdient = new List<long>();
@@ -50,7 +50,7 @@ namespace AdventOfCode.Year2025
 
         public Int128 SolveTwo()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day5.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day5.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
             List<(long, long)> fresh = new List<(long, long)>();
 

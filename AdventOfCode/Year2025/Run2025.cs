@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AdventOfCode.Year2025
+﻿namespace AdventOfCode.Year2025
 {
     public static class Run2025
     {

@@ -12,7 +12,9 @@
     {
         public Int128 SolveOne()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day8.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); 
+            string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day8.txt"); 
+            string input = System.IO.File.ReadAllText(configFile);
             string[] row = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
             Day8Object[] boxs = new Day8Object[row.Length];
 
@@ -84,7 +86,7 @@
 
         public Int128 SolveTwo()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day8.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day8.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] row = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
             Day8Object[] boxs = new Day8Object[row.Length];
 

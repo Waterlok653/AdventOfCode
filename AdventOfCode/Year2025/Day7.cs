@@ -4,7 +4,7 @@
     {
         public Int128 SolveOne()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day7.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day7.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] row = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
             var inputs = row.Select(t => t.ToCharArray()).ToArray();
 
@@ -44,7 +44,7 @@
 
         public Int128 SolveTwo()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day7.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day7.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] row = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
             var inputs = row.Select(t => t.ToCharArray()).ToArray();
             long[,] currentAtPos = new long[inputs.Length, inputs[0].Length];

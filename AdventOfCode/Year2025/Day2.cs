@@ -4,7 +4,7 @@
     {
         public Int128 SolveOne()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day2.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day2.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] inputs = input.Split(",");
             (long, long)[] ranges = inputs.Select(s =>
             {
@@ -40,7 +40,7 @@
 
         public Int128 SolveTwo()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day2.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day2.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] inputs = input.Split(",");
             (long, long)[] ranges = inputs.Select(s =>
             {

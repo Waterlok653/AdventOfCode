@@ -64,7 +64,7 @@ namespace AdventOfCode.Year2025
         public Int128 Solve()
         {
 
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day10.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day10.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
 
             List<Day10Part2Object> list = new List<Day10Part2Object>();

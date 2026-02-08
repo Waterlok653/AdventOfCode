@@ -12,7 +12,7 @@
         Dictionary<(Day11Object, bool fft, bool dac), Int128> DidVisite = new Dictionary<(Day11Object, bool fft, bool dac), Int128>();
         public Int128 SolveOne()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day11.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day11.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
 
             List<Day11Object> allServer = new List<Day11Object>();
@@ -93,7 +93,7 @@
 
         public Int128 SolveTwo()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day11.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE"); string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day11.txt"); string input = System.IO.File.ReadAllText(configFile);
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
 
             List<Day11Object> allServer = new List<Day11Object>();

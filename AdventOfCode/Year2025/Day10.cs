@@ -15,7 +15,9 @@ namespace AdventOfCode.Year2025
         public int[][] AllShape = new int[0][];
         public Int128 SolveOne()
         {
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day10.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE");
+            string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day10.txt");
+            string input = System.IO.File.ReadAllText(configFile);
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
 
             List<Day10Object> list = new List<Day10Object>();
@@ -212,7 +214,9 @@ namespace AdventOfCode.Year2025
         public Int128 SolveTwo()
         {
 
-            string input = System.IO.File.ReadAllText("C:\\Users\\Moi\\source\\repos\\AdventOfCode\\AdventOfCode\\Year2025\\inputs\\day10.txt");
+            string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE");
+            string configFile = Path.Combine(basePath, "AdventOfCode\\Year2025\\inputs\\day10.txt");
+            string input = System.IO.File.ReadAllText(configFile);
             string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
 
             List<Day10Object> list = new List<Day10Object>();

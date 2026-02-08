@@ -1,4 +1,5 @@
-﻿using AdventOfCode.Year2025;
+﻿using AdventOfCode.Year2024;
+using AdventOfCode.Year2025;
 
 namespace AdventOfCode
 {
@@ -22,7 +23,7 @@ namespace AdventOfCode
                 {
                     Console.WriteLine("Day 1 / ... / 12 / [A]ll):");
                 }
-                    dayInput = Console.ReadLine()?.Trim();
+                dayInput = Console.ReadLine()?.Trim();
                 if (!dayInput.Equals("A"))
                 {
                     Console.WriteLine("Part 1 / 2 / [A]ll):");
@@ -68,8 +69,8 @@ namespace AdventOfCode
                 case 2020: Run2020.Run(dayInput, partInput); break;
                 case 2021: Run2021.Run(dayInput, partInput); break;
                 case 2022: Run2022.Run(dayInput, partInput); break;
-                case 2023: Run2023.Run(dayInput, partInput); break;
-                case 2024: Run2024.Run(dayInput, partInput); break;*/
+                case 2023: Run2023.Run(dayInput, partInput); break;*/
+                case 2024: Run2024.Run(dayInput, partInput); break;
                 case 2025: Run2025.Run(dayInput, partInput); break;
             }
         }
