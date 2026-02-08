@@ -12,9 +12,8 @@ namespace AdventOfCode.Year2015
             string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE");
             string configFile = Path.Combine(basePath, "AdventOfCode\\Year2015\\inputs\\day1.txt");
             string input = File.ReadAllText(configFile);
-            string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
-
-            return 0;
+            
+            return input.Count('(') - input.Count(')');
         }
 
         public BigInteger SolveTwo()
@@ -22,8 +21,22 @@ namespace AdventOfCode.Year2015
             string basePath = Environment.GetEnvironmentVariable("ADVENT_OF_CODE");
             string configFile = Path.Combine(basePath, "AdventOfCode\\Year2015\\inputs\\day1.txt");
             string input = File.ReadAllText(configFile);
-            string[] inputs = input.Split(new[] { "\r\n", "\n\r", "\r", "\n" }, StringSplitOptions.None);
-
+            int currentFloor = 0;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i] == '(')
+                {
+                    currentFloor++;
+                }
+                else
+                {
+                    currentFloor--;
+                }
+                if (currentFloor == -1)
+                {
+                    return i + 1;
+                }
+            }
             return 0;
         }
     }
