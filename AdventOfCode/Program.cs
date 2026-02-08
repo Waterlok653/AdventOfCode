@@ -1,4 +1,14 @@
-﻿using AdventOfCode.Year2024;
+﻿
+using AdventOfCode.Year2015;
+using AdventOfCode.Year2016;
+using AdventOfCode.Year2017;
+using AdventOfCode.Year2018;
+using AdventOfCode.Year2019;
+using AdventOfCode.Year2020;
+using AdventOfCode.Year2021;
+using AdventOfCode.Year2022;
+using AdventOfCode.Year2023;
+using AdventOfCode.Year2024;
 using AdventOfCode.Year2025;
 
 namespace AdventOfCode
@@ -12,6 +22,14 @@ namespace AdventOfCode
             string partInput = "";
             Console.WriteLine("Year 2015 / ... / 2025 / [A]ll):");
             yearInput = Console.ReadLine()?.Trim();
+            if (yearInput.Equals("C"))
+            {
+                for (int i = 2015; i <= 2024; i++)
+                {
+                    AdventOfCodeFileGenerator.Create(i.ToString());
+                }
+                return;
+            }
             if (!yearInput.Equals("A"))
             {
                 if (int.Parse(yearInput) < 2025)
@@ -61,7 +79,7 @@ namespace AdventOfCode
         {
             switch (year)
             {
-                /*case 2015: Run2015.Run(dayInput, partInput); break;
+                case 2015: Run2015.Run(dayInput, partInput); break;
                 case 2016: Run2016.Run(dayInput, partInput); break;
                 case 2017: Run2017.Run(dayInput, partInput); break;
                 case 2018: Run2018.Run(dayInput, partInput); break;
@@ -69,7 +87,7 @@ namespace AdventOfCode
                 case 2020: Run2020.Run(dayInput, partInput); break;
                 case 2021: Run2021.Run(dayInput, partInput); break;
                 case 2022: Run2022.Run(dayInput, partInput); break;
-                case 2023: Run2023.Run(dayInput, partInput); break;*/
+                case 2023: Run2023.Run(dayInput, partInput); break;
                 case 2024: Run2024.Run(dayInput, partInput); break;
                 case 2025: Run2025.Run(dayInput, partInput); break;
             }

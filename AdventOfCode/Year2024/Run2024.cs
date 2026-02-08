@@ -1,4 +1,5 @@
-﻿namespace AdventOfCode.Year2024
+
+namespace AdventOfCode.Year2024
 {
     public static class Run2024
     {
@@ -59,13 +60,13 @@
                 case 22: if (part == 1) RunD22P1(); else RunD22P2(); break;
                 case 23: if (part == 1) RunD23P1(); else RunD23P2(); break;
                 case 24: if (part == 1) RunD24P1(); else RunD24P2(); break;
-                case 25: if (part == 1) RunD25P1(); break;
-
+                case 25: if (part == 1) RunD25P1(); else RunD25P2(); break;
+                
             }
         }
 
-        // ===== EXISTING METHODS (UNCHANGED) =====
-
+        // ===== EXISTING METHODS (AUTO-GENERATED) =====
+        
         public static void RunD1P1()
         {
             var day1 = new Day1();
@@ -172,8 +173,8 @@
         }
         public static void RunD10P2()
         {
-            var day10 = new Day10Part2NoNuget();
-            RunDayStatistique.RunPart("Day 10", "Part 2", () => day10.Solve());
+            var day10 = new Day10();
+            RunDayStatistique.RunPart("Day 10", "Part 2", () => day10.SolveTwo());
         }
 
         public static void RunD11P1()
@@ -335,5 +336,11 @@
             var day25 = new Day25();
             RunDayStatistique.RunPart("Day 25", "Part 1", () => day25.SolveOne());
         }
+        public static void RunD25P2()
+        {
+            var day25 = new Day25();
+            RunDayStatistique.RunPart("Day 25", "Part 2", () => day25.SolveTwo());
+        }
+
     }
 }
