@@ -110,38 +110,23 @@ namespace AdventOfCode.Year2015
             string configFile = Path.Combine(basePath, "AdventOfCode\\Year2015\\inputs\\day10.txt");
             string input = File.ReadAllText(configFile);
 
+            List<string> elements = new List<string>();
+            elements.Add(allElement.First(t => t.Value.Item2.Equals(input)).Key);
             for (int i = 0; i < 40; i++)
             {
-                string newData = "";
-                char? lastNb = null;
-                int count = 0;
-                foreach (var number in input)
+                List<string> newData = new List<string>();
+                foreach (var element in elements)
                 {
-                    if (lastNb == null)
-                    {
-                        lastNb = number;
-                        count++;
-                        continue;
-                    }
-                    if (number == lastNb)
-                    {
-                        count++;
-                    }
-                    else
-                    {
-                        newData += count;
-                        newData += lastNb;
-                        lastNb = number;
-                        count = 1;
-
-                    }
+                    newData.AddRange(allElement.GetValueOrDefault(element).Item1.Split("."));
                 }
-                newData += count;
-                newData += lastNb;
-                input = newData;
+                elements = newData;
             }
-
-            return input.Length;
+            var sum = 0;
+            foreach (var element in elements)
+            {
+                sum += allElement.GetValueOrDefault(element).Item2.Length;
+            }
+            return sum;
         }
 
         public BigInteger SolveTwo()
