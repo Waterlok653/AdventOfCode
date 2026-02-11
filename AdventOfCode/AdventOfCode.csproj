@@ -13,7 +13,6 @@
   </ItemGroup>
 	
   <ItemGroup>
-    <Folder Include="Year2015\" />
     <Folder Include="Year2016\" />
     <Folder Include="Year2017\" />
     <Folder Include="Year2018\" />
