@@ -26,7 +26,7 @@ namespace AdventOfCode
             {
                 for (int i = 2015; i <= 2024; i++)
                 {
-                    AdventOfCodeFileGenerator.Create(i.ToString());
+                    AdventOfCodeFileGenerator.Create(2025.ToString());
                 }
                 return;
             }

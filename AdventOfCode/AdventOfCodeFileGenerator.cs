@@ -19,7 +19,7 @@ namespace AdventOfCode
             Directory.CreateDirectory(Path.Combine(yearPath, "inputs"));
 
             // Number of days in Advent of Code
-            int totalDays = 25;
+            int totalDays = 12;
 
 
             // ===== Generate DayX.cs files =====
@@ -28,9 +28,11 @@ namespace AdventOfCode
                 string dayClass = $"Day{day}";
                 string fileName = Path.Combine(yearPath, $"{dayClass.ToLower()}.cs");
                 var intputFile = Path.Combine(yearPath, "inputs", $"{dayClass.ToLower()}.txt");
-                if (!File.Exists(intputFile))
+                if (!File.Exists(intputFile) || new FileInfo(intputFile).Length == 0)
                 {
-                    File.WriteAllText(intputFile, "");
+                    Console.WriteLine($"Downloading input for Day {day}...");
+                    var input = AoCInputDownloader.DownloadInputAsync(year, day).Result;
+                    File.WriteAllText(intputFile, input.TrimEnd());
                 }
                 string fileContent = $@"
 using System;
